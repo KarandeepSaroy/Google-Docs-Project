@@ -17,6 +17,7 @@ import { LineHeightExtension } from "@/extensions/line-height";
 
 
 import { useEditorStore } from "@/store/use-editor-store";
+import { Ruler } from "./ruler";
 
 export const Editor = () => {
 
@@ -86,27 +87,13 @@ export const Editor = () => {
       })
     ],
 
-    content: `
-        <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-      `,
+    content: ``,
     immediatelyRender: false,
   });
   
   return (
     <div className="size-full overflow-x-auto bg-[#F9FBFD] px-4 print:p-0 print:bg-white print:overflow-visible">
+      <Ruler />      
       <div className="min-w-max flex justify-center w-204 py-4 print:py-0 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
       </div>
