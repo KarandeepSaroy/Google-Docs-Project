@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/store/use-editor-store";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
 
@@ -243,7 +244,9 @@ export const Navbar = () => {
                     </MenubarSubContent>
                   </MenubarSub>
                   <MenubarItem
-                    onClick={() => editor?.chain().focus().unsetAllMarks().run()}
+                    onClick={() =>
+                      editor?.chain().focus().unsetAllMarks().run()
+                    }
                   >
                     <RemoveFormattingIcon className="size-4 mr-2" />
                     Clear formatting
@@ -253,6 +256,15 @@ export const Navbar = () => {
             </Menubar>
           </div>
         </div>
+      </div>
+      <div className="flex gap-3 items-center">
+        <OrganizationSwitcher
+          afterCreateOrganizationUrl="/"
+          afterLeaveOrganizationUrl="/"
+          afterSelectOrganizationUrl="/"
+          afterSelectPersonalUrl="/"
+        />
+        <UserButton />
       </div>
     </nav>
   );
