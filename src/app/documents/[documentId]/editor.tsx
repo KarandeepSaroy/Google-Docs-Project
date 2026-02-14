@@ -1,52 +1,62 @@
 "use client";
 
-import { TaskList, TaskItem } from "@tiptap/extension-list";
 import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import { TableKit } from "@tiptap/extension-table";
+import { TaskList } from '@tiptap/extension-task-list'
+import { TaskItem } from '@tiptap/extension-task-item'
+import StarterKit from "@tiptap/starter-kit"
+import { Table } from "@tiptap/extension-table";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableHeader } from "@tiptap/extension-table-header";
 import { Color } from "@tiptap/extension-color";
 import { Highlight } from "@tiptap/extension-highlight";
 import { Image } from "@tiptap/extension-image";
-import { ImageResize } from "tiptap-extension-resize-image";
 import { Underline } from '@tiptap/extension-underline'
-import { FontFamily, TextStyle } from "@tiptap/extension-text-style";
+import { TextStyle } from "@tiptap/extension-text-style";
+import { FontFamily } from "@tiptap/extension-font-family";
+import ResizeImage from "tiptap-extension-resize-image";
 import { Link } from "@tiptap/extension-link";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { FontSizeExtension } from "@/extensions/font-size";
 import { LineHeightExtension } from "@/extensions/line-height";
-
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap"
 
 import { useEditorStore } from "@/store/use-editor-store";
 import { Ruler } from "./ruler";
+import { Threads } from "./threads";
+
+
 
 export const Editor = () => {
+
+  const liveblocks = useLiveblocksExtension();
 
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({
     onCreate({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     onDestroy() {
       setEditor(null);
     },
     onUpdate({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     onSelectionUpdate({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     onTransaction({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     onFocus({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     onBlur({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     onContentError({ editor }) {
-      setEditor(editor)
+      setEditor(editor);
     },
     editorProps: {
       attributes: {
@@ -57,14 +67,19 @@ export const Editor = () => {
     },
 
     extensions: [
-      StarterKit,
+      liveblocks,
+      StarterKit.configure({
+        history: false,
+      }),
       TaskList,
       TaskItem.configure({
         nested: true,
       }),
-      TableKit,
+      Table,
+      TableRow,
+      TableCell,
+      TableHeader,
       Image,
-      ImageResize,
       Underline,
       FontFamily,
       TextStyle,
@@ -77,14 +92,15 @@ export const Editor = () => {
         autolink: true,
         defaultProtocol: "https",
       }),
+      ResizeImage,
       TextAlign.configure({
-        types: ["heading", "paragraph"]
+        types: ["heading", "paragraph"],
       }),
       FontSizeExtension,
       LineHeightExtension.configure({
         types: ["heading", "paragraph"],
-        defaultLineHeight: "normal"
-      })
+        defaultLineHeight: "normal",
+      }),
     ],
 
     content: ``,
@@ -96,6 +112,7 @@ export const Editor = () => {
       <Ruler />      
       <div className="min-w-max flex justify-center w-204 py-4 print:py-0 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
+        <Threads editor={editor} />
       </div>
     </div>
   );
