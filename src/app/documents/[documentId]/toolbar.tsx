@@ -143,6 +143,7 @@ const FontSizeButton = () => {
   return (
     <div className="flex items-center gap-x-0.5">
       <button
+        type="button"
         onClick={decrement}
         className="h-7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80"
       >
@@ -199,7 +200,7 @@ const ListButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+        <button type="button" className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
           <ListIcon className="size-4" />
         </button>
       </DropdownMenuTrigger>
@@ -207,6 +208,7 @@ const ListButton = () => {
         {lists.map(({ label, icon: Icon, onClick, isActive }) => (
           // eslint-disable-next-line react/jsx-key
           <button
+            type="button"
             key={label}
             onClick={onClick}
             className={cn(
@@ -252,7 +254,7 @@ const AlignButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+        <button type="button" className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
           <AlignLeftIcon className="size-4" />
         </button>
       </DropdownMenuTrigger>
@@ -260,6 +262,7 @@ const AlignButton = () => {
         {alignments.map(({ label, value, icon: Icon }) => (
           // eslint-disable-next-line react/jsx-key
           <button
+            type="button"
             key={value}
             onClick={() => editor?.chain().focus().setTextAlign(value).run()}
             className={cn(
@@ -315,7 +318,7 @@ const ImageButton = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+          <button type="button" className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
             <ImageIcon className="size-4" />
           </button>
         </DropdownMenuTrigger>
@@ -425,7 +428,7 @@ const TextColorButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+        <button type="button" className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
           <span className="text-xs">A</span>
           <div className="h-0.5 w-full" style={{ backgroundColor: value }} />
         </button>
