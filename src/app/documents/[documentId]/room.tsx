@@ -5,7 +5,7 @@ import {
   RoomProvider,
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { FullscreenLoader } from "@/components/fullscreen-loader";
 import { getUsers, getDocuments } from "./actions";
@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { RIGHT_MARGIN_DEFAULT, LEFT_MARGIN_DEFAULT } from "@/constants/margin";
 
-type User = { id: string; name: string; avatar: string };
+type User = { id: string; name: string; avatar: string, color?: string };
 
 export function Room({ children }: { children: ReactNode }) {
   const params = useParams();
@@ -36,22 +36,35 @@ export function Room({ children }: { children: ReactNode }) {
   return (
     <LiveblocksProvider
       throttle={16}
-      authEndpoint={ async () => {
+      authEndpoint={async () => {
         const endpoint = "/api/liveblocks-auth";
         const room = params.documentId as string;
 
         const response = await fetch(endpoint, {
           method: "POST",
-          body: JSON.stringify({ room })
+          body: JSON.stringify({ room }),
         });
 
         return await response.json();
       }}
+      // resolveUsers={({ userIds }) => {
+      //   return userIds.map(
+      //     (userId) => users.find((user) => user.id === userId) ?? undefined,
+      //   );
+      // }}
 
       resolveUsers={({ userIds }) => {
-        return userIds.map(
-          (userId) => users.find((user) => user.id === userId) ?? undefined,
-        );
+        return userIds.map((userId) => {
+          const user = users.find((u) => u.id === userId);
+
+          if (!user) return undefined;
+
+          return {
+            name: user.name,
+            avatar: user.avatar,
+            color: user.color ?? "#000000", // guarantee string
+          };
+        });
       }}
       resolveMentionSuggestions={({ text }) => {
         let filteredUsers = users;
@@ -69,12 +82,15 @@ export function Room({ children }: { children: ReactNode }) {
         return documents.map((document) => ({
           id: document.id,
           name: document.name,
-        }))
+        }));
       }}
     >
       <RoomProvider
         id={params.documentId as string}
-        initialStorage={{ leftMargin: LEFT_MARGIN_DEFAULT, rightMargin: RIGHT_MARGIN_DEFAULT }}
+        initialStorage={{
+          leftMargin: LEFT_MARGIN_DEFAULT,
+          rightMargin: RIGHT_MARGIN_DEFAULT,
+        }}
       >
         <ClientSideSuspense
           fallback={<FullscreenLoader label="Room loading..." />}
