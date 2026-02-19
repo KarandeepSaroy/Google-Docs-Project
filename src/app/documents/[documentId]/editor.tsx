@@ -102,7 +102,7 @@ export const Editor = ({ initialContent }: EditorProps) => {
         autolink: true,
         defaultProtocol: "https",
       }),
-      ResizeImage,
+      // ResizeImage,
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
