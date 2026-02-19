@@ -73,10 +73,10 @@ export const Ruler = () => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
-            className="w-[816px] mx-auto h-6 border-b border-gray-300 flex items-end relative select-none print:hidden">
+            className="w-204 mx-auto h-6 border-b border-gray-300 flex items-end relative select-none print:hidden">
             <div
                 id="ruler-container"
-                className="max-w-[816px] mx-auto w-full h-full relative"
+                className="max-w-204 mx-auto w-full h-full relative"
             >
                 <Marker
                     position={leftMargin}
@@ -144,7 +144,7 @@ const Marker = ({
 }: MarkerProps) => {
     return (
     <div
-        className="absolute top-0 w-4 h-full cursor-ew-resize z-[5] group -ml-2"
+        className="absolute top-0 w-4 h-full cursor-ew-resize z-5 group -ml-2"
         style={{ [isLeft ? "left" : "right"]: `${position}px` }}
         onMouseDown={onMouseDown}
         onDoubleClick={onDoubleClick}

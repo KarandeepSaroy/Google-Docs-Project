@@ -37,7 +37,7 @@ export const TemplatesGallery = () => {
 
   return (
     <div className="bg-[#F1F3F4]">
-      <div className="max-w-screen-xl mx-auto px-16 py-6 flex flex-col gap-y-4">
+      <div className="max-w-7xl mx-auto px-16 py-6 flex flex-col gap-y-4">
         <h3 className="font-medium">Start a new document</h3>
         <Carousel>
           <CarouselContent className="-ml-4">
@@ -48,7 +48,7 @@ export const TemplatesGallery = () => {
               >
                 <div
                   className={cn(
-                    "aspect-[3/4] flex flex-col gap-y-2.5",
+                    "aspect-3/4 flex flex-col gap-y-2.5",
                     isCreating && "pointer-events-none opacity-50",
                   )}
                 >

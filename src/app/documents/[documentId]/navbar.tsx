@@ -43,7 +43,6 @@ import { Inbox } from "./inbox";
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
-import { id } from "date-fns/locale";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -185,7 +184,7 @@ export const Navbar = ({ data }: NavbarProps) => {
                 </MenubarContent>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger className="text-sm font-normal py-0.5 px-[7px] rounded-sm hover:bg-muted h-auto">
+                <MenubarTrigger className="text-sm font-normal py-0.5 px-1.75 rounded-sm hover:bg-muted h-auto">
                   Edit
                 </MenubarTrigger>
                 <MenubarContent>
@@ -204,7 +203,7 @@ export const Navbar = ({ data }: NavbarProps) => {
                 </MenubarContent>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger className="text-sm font-normal py-0.5 px-[7px] rounded-sm hover:bg-muted h-auto">
+                <MenubarTrigger className="text-sm font-normal py-0.5 px-1.75 rounded-sm hover:bg-muted h-auto">
                   Insert
                 </MenubarTrigger>
                 <MenubarContent>
@@ -236,7 +235,7 @@ export const Navbar = ({ data }: NavbarProps) => {
                 </MenubarContent>
               </MenubarMenu>
               <MenubarMenu>
-                <MenubarTrigger className="text-sm font-normal py-0.5 px-[7px] rounded-sm hover:bg-muted h-auto">
+                <MenubarTrigger className="text-sm font-normal py-0.5 px-1.75 rounded-sm hover:bg-muted h-auto">
                   Format
                 </MenubarTrigger>
                 <MenubarContent>
